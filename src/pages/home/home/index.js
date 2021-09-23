@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { getRestaurants } from "../../../api/restaurants";
-import Container from "../../../components/common/Container";
 import IScrollView from "../../../components/common/IScrollView";
 import RestaurantItem from "../../../components/items/Restaurant";
 import { pageNames } from "../../../constant";

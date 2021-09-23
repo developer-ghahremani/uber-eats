@@ -8,6 +8,7 @@ import colors from "../../styles/colors";
 import Row from "../common/Row";
 import IDivider from "../common/IDivider";
 import ITouchable from "../common/ITouchable";
+import HeartIcon from "../icons/Heart";
 
 const RestaurantItem = ({ onPress, restaurant }) => {
   const {
@@ -37,8 +38,7 @@ const RestaurantItem = ({ onPress, restaurant }) => {
             style={{ width: "100%", height: 250 }}
           />
           <Container style={styles.fakeContainer}>
-            <AntDesign
-              name="hearto"
+            <HeartIcon
               size={20}
               color={colors.white}
               style={{ top: 10, right: 10, position: "absolute" }}

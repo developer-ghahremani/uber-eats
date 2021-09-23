@@ -16,7 +16,9 @@ const Home = () => {
             headerShown: false,
             tabBarIcon: route.tabBarIcon,
             tabBarLabel: ({ focused }) => (
-              <IText color={focused ? colors.black : colors.gray1}>
+              <IText
+                fontSize={14}
+                color={focused ? colors.black : colors.gray1}>
                 {route.title}
               </IText>
             ),
