@@ -8,6 +8,9 @@ export const pageNames = {
     orders: "/home/orders",
     account: "/home/account",
   },
+  restaurantDetails: {
+    index: "/restaurantDetails",
+  },
 };
 
 export const endPoints = {
