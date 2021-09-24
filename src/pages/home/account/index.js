@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import MainLayout from "../../../layout/main";
 
 const Account = () => {
   console.log("___Worked From Home/Accounts");
   return (
-    <View>
+    <MainLayout>
       <Text>account page</Text>
-    </View>
+    </MainLayout>
   );
 };
 

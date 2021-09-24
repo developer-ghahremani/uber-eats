@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import MainLayout from "../../../layout/main";
 
 const Browse = () => {
   console.log("___Worked From Home/Browse");
   return (
-    <View>
+    <MainLayout>
       <Text>browse page</Text>
-    </View>
+    </MainLayout>
   );
 };
 
