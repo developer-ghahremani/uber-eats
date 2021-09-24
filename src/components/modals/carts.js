@@ -2,10 +2,13 @@ import React, { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { connect, useDispatch } from "react-redux";
 import { setCartModal } from "../../redux/actions/cartModal";
-import { getLog } from "../../utils";
+import colors from "../../styles/colors";
+import { getLog, getRandomString } from "../../utils";
 import Container from "../common/Container";
 import IBottomSheet from "../common/IBottomSheet";
-import IText from "../common/IText";
+import CartItem from "../items/Cart";
+import IButton from "../items/IButton";
+import { firestore, auth } from "./../../firebase";
 
 const CartModal = memo(
   ({ cartModal, carts, ...prp }) => {
@@ -16,12 +19,39 @@ const CartModal = memo(
       dispatch(setCartModal(false));
     };
 
+    const onCheckout = async () => {
+      if (!auth.currentUser) return handleLogin();
+
+      try {
+        await firestore.collection("Orders").add({
+          name: "Reza Ghahremani",
+          order: carts,
+          status: "Created",
+          id: getRandomString(5),
+        });
+      } catch (error) {
+        console.log(error.message, "error");
+      }
+    };
+
     return (
       <IBottomSheet visible={cartModal} onClose={handleClose}>
         <Container backgroundColor="white">
           {carts.map((item) => (
-            <IText key={item.product?.title}>{item.product?.title}</IText>
+            <CartItem cart={item} key={item.product.title} />
           ))}
+          <Container mX={25} mY={20}>
+            <IButton
+              style={{ backgroundColor: colors.black, borderRadius: 25 }}
+              textStyle={{
+                marginVertical: 10,
+                color: colors.white,
+                fontSize: 20,
+              }}
+              onPress={onCheckout}>
+              Checkout
+            </IButton>
+          </Container>
         </Container>
       </IBottomSheet>
     );

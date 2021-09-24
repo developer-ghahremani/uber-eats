@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import router from "./router";
 import IText from "../../components/common/IText";
 import colors from "../../styles/colors";
+import { pageNames } from "../../constant";
 
 const Home = () => {
   const Stack = createBottomTabNavigator();
@@ -12,19 +13,19 @@ const Home = () => {
       {router.map((route) => (
         <Stack.Screen
           options={{
-            title: route.title,
             headerShown: false,
             tabBarIcon: route.tabBarIcon,
             tabBarLabel: ({ focused }) => (
               <IText
-                fontSize={14}
+                fontSize={12}
                 color={focused ? colors.black : colors.gray1}>
                 {route.title}
               </IText>
             ),
+            unmountOnBlur: route.name === pageNames.home.orders,
           }}
-          {...route}
           key={route.name}
+          {...route}
         />
       ))}
     </Stack.Navigator>

@@ -1,5 +1,6 @@
 export const pageNames = {
   splash: "/splash",
+  auth: "/auth",
   home: {
     index: "/home",
     home: "/home/home",
@@ -83,4 +84,6 @@ export const foods = [
 export const reduxTypes = {
   carts: "reduxCartTypes",
   cartModal: "reduxCartModalTypes",
+  orders: "reduxOrdersTypes",
+  user: "reduxUserTypes",
 };
