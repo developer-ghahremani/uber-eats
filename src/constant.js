@@ -86,4 +86,10 @@ export const reduxTypes = {
   cartModal: "reduxCartModalTypes",
   orders: "reduxOrdersTypes",
   user: "reduxUserTypes",
+  warningModal: "reduxWarningModalTypes",
+};
+
+export const constants = {
+  login: "Login",
+  signup: "Signup",
 };

@@ -16,15 +16,16 @@ const Home = () => {
   const [state, setState] = useState({
     transactionType: "delivery",
     restaurants: [],
+    place: "San Diego",
   });
 
   useEffect(() => {
-    loadRestaurants();
-  }, []);
+    if (state.place.length > 2) loadRestaurants();
+  }, [state.place]);
 
-  const loadRestaurants = async (params) => {
+  const loadRestaurants = async () => {
     try {
-      const { data } = await getRestaurants();
+      const { data } = await getRestaurants(state.place);
       setState((s) => ({ ...s, restaurants: data.businesses }));
     } catch (error) {
       console.log(error.message);
@@ -38,6 +39,9 @@ const Home = () => {
   const onPressRestaurant = (restaurant) => {
     navigate(pageNames.restaurantDetails.index, { restaurant });
   };
+  const handleChangePlace = (place) => {
+    setState((s) => ({ ...s, place: place.name }));
+  };
 
   return (
     <MainLayout>
@@ -45,7 +49,7 @@ const Home = () => {
         onChangeTrasactionType={onChangeTrasactionType}
         transactionType={state.transactionType}
       />
-      <SearchBar />
+      <SearchBar place={state.place} onChangePlace={handleChangePlace} />
       <IScrollView>
         <Categories />
         {[...state.restaurants]

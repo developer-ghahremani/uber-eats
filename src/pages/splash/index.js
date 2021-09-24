@@ -1,19 +1,19 @@
 import { useNavigation } from "@react-navigation/core";
+import { connect } from "react-redux";
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import Container from "../../components/common/Container";
 import { pageNames } from "../../constant";
-import { auth } from "../../firebase";
 import MainLayout from "../../layout/main";
 
-const Splash = () => {
-  const { navigate } = useNavigation();
+const Splash = ({ user }) => {
+  const { replace } = useNavigation();
   console.log("___Worked From Splash");
 
   useEffect(() => {
-    return navigate(pageNames.auth);
-    navigate(pageNames.home.index);
-  }, [auth.currentUser]);
+    if (user && user.uid) return replace(pageNames.home.index);
+    replace(pageNames.auth);
+  }, []);
 
   return (
     <MainLayout>
@@ -24,6 +24,10 @@ const Splash = () => {
   );
 };
 
-export default Splash;
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, null)(Splash);
 
 const styles = StyleSheet.create({});

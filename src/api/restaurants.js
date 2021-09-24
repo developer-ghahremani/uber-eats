@@ -10,11 +10,11 @@ import { endPoints } from "../constant";
  * @returns
  */
 export const getRestaurants = (
-  location = "SanDiego",
+  location = "San Diego",
   limit = 50,
   offset = 0,
   term = "restaurants"
 ) =>
   api.get(endPoints.businesses.search, {
-    params: { limit, offset, term, location },
+    params: { limit, offset, term, location: location.replace(" ", "") },
   });

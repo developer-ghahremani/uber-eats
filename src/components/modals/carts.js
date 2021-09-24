@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { connect, useDispatch } from "react-redux";
 import { setCartModal } from "../../redux/actions/cartModal";
+import { setCarts } from "../../redux/actions/carts";
 import colors from "../../styles/colors";
 import { getLog, getRandomString } from "../../utils";
 import Container from "../common/Container";
@@ -11,7 +12,7 @@ import IButton from "../items/IButton";
 import { firestore, auth } from "./../../firebase";
 
 const CartModal = memo(
-  ({ cartModal, carts, ...prp }) => {
+  ({ cartModal, carts, user, ...prp }) => {
     getLog("Cart Modal");
     const dispatch = useDispatch();
 
@@ -24,13 +25,17 @@ const CartModal = memo(
 
       try {
         await firestore.collection("Orders").add({
-          name: "Reza Ghahremani",
+          user,
           order: carts,
           status: "Created",
-          id: getRandomString(5),
+          id: getRandomString(8),
+          createdAt: new Date().getTime(),
         });
+        dispatch(setCarts([]));
       } catch (error) {
         console.log(error.message, "error");
+      } finally {
+        handleClose();
       }
     };
 
@@ -62,6 +67,7 @@ const CartModal = memo(
 const mapStateToProps = (state) => ({
   cartModal: state.cartModal,
   carts: state.carts,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, null)(CartModal);

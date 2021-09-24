@@ -12,7 +12,12 @@ import { StyleSheet, Text, View, TextPropTypes } from "react-native";
  * @returns
  */
 const IText = ({ color, fontSize, bold, style, children }) => {
-  return <Text style={{ color, fontSize, ...style }}>{children}</Text>;
+  return (
+    <Text
+      style={{ color, fontSize, fontFamily: bold ? "sfBold" : "sf", ...style }}>
+      {children}
+    </Text>
+  );
 };
 
 IText.propTypes = {

@@ -11,12 +11,12 @@ import { getLog } from "../../utils";
 
 const ViewCarts = memo(
   ({ carts }) => {
+    getLog("View Cart BUtton");
     const dispatch = useDispatch();
 
     const handleCartModal = (params) => {
       dispatch(setCartModal(true));
     };
-    getLog("View Cart BUtton");
     return (
       <Container style={styles.container}>
         <ITouchable onPress={handleCartModal} style={styles.cartButton}>

@@ -11,9 +11,13 @@ import IText from "../../../components/common/IText";
 import PlaceItem from "../../../components/items/Place";
 
 const SearchBar = memo(
-  () => {
+  ({ place, onChangePlace }) => {
     console.log("___Worked From Home/SeatchBar");
     const [state, setState] = useState({ cities: [] });
+    const handlePressPlace = (place) => {
+      onChangePlace(place);
+    };
+
     return (
       <Container mX={15}>
         <Row
@@ -58,17 +62,21 @@ const SearchBar = memo(
                 marginHorizontal: 5,
               }}>
               <AntDesign name="clockcircle" size={15} />
-              <IText style={{ marginHorizontal: 5 }}>Search</IText>
+              <IText style={{ marginHorizontal: 5 }}>{place}</IText>
             </Row>
           </ITouchable>
         </Row>
         {state.cities.map((item) => (
-          <PlaceItem key={JSON.stringify(item)} place={item} />
+          <PlaceItem
+            onPress={handlePressPlace}
+            key={JSON.stringify(item)}
+            place={item}
+          />
         ))}
       </Container>
     );
   },
-  () => true
+  (pre, next) => pre.place === next.place
 );
 
 export default SearchBar;
