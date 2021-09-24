@@ -146,6 +146,7 @@ const Auth = () => {
                 value={values.password}
                 onChangeText={handleChange("password")}
                 error={touched.password && errors.password}
+                secureTextEntry
               />
 
               <IButton
